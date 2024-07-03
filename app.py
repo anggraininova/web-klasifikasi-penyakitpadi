@@ -2,7 +2,7 @@ from img_classification import teachable_machine_classification
 import keras
 from PIL import Image, ImageOps
 import numpy as np
-
+import boto3
 
 import streamlit as st
 from streamlit_option_menu import option_menu
@@ -61,7 +61,9 @@ if selected == "Home":
 
 
 
-
+# Download model dari S3
+s3 = boto3.client('s3')
+s3.download_file('datasetpadi', 'keras_model.h5', 'keras_model.h5')
 
 if selected == "Image Classifier":
 	
