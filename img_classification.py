@@ -1,11 +1,10 @@
-import keras
+import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
 
-
-def teachable_machine_classification(img, weights_file):
-    # Load the model
-    model = keras.models.load_model(weights_file)
+def teachable_machine_classification(image, model_path):
+    # Muat model
+    model = tf.keras.models.load_model(model_path)
 
     # Create the array of the right shape to feed into the keras model
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
