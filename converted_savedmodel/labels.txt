@@ -1,5 +1,0 @@
-0 BrownSpot
-1 Healthy
-2 Hispa
-3 LeafBlast
-4 bukan_padi
