@@ -58,8 +58,8 @@ if selected == "Home":
 
 # Download model dari S3
 bucket_name = 'datasetpadi'
-model_key = 'rice_models.h5'
-local_model_path = 'rice_models.h5'
+model_key = 'keras_model.h5'
+local_model_path = 'keras_model.h5'
 download_model_from_s3(bucket_name, model_key, local_model_path)
 
 # Image Classifier
