@@ -58,8 +58,8 @@ if selected == "Home":
 
 # Download model dari S3
 bucket_name = 'datasetpenyakitpadi'
-model_key = 'keras_model.h5'
-local_model_path = 'keras_model.h5'
+model_key = 'my_model.h5'
+local_model_path = 'my_model.h5'
 download_model_from_s3(bucket_name, model_key, local_model_path)
 
 # Image Classifier
@@ -71,7 +71,8 @@ if selected == "Image Classifier":
         image = Image.open(uploaded_file)
         st.image(image, caption='Uploaded image.', use_column_width=True)
         st.write("Classifying...")
-        label, confidence_score = teachable_machine_classification(image, local_model_path)
+        confidence_score = teachable_machine_classification(image, 'my_model.h5')
+	    label = teachable_machine_classification(image, 'my_model.h5')
         if label == 0:
             st.write("Actual: _BrownSpot")
             st.write("Predicted: _BrownSpot")
