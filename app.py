@@ -57,7 +57,7 @@ if selected == "Home":
         st.image(image_sample4, caption="Contoh leafblast")
 
 # Download model dari S3
-bucket_name = 'datasetpadi'
+bucket_name = 'datasetpenyakitpadi'
 model_key = 'keras_model.h5'
 local_model_path = 'keras_model.h5'
 download_model_from_s3(bucket_name, model_key, local_model_path)
