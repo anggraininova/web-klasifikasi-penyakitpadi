@@ -1,15 +1,32 @@
+import boto3
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
+import os
 
-# Disable scientific notation for clarity
-np.set_printoptions(suppress=True)
+# Setup AWS S3 client
+s3 = boto3.client('s3')
+
+# S3 bucket and file details
+bucket_name = 'datasetpenyakitpadi'
+model_file_name = 'keras_model.h5'
+labels_file_name = 'labels.txt'
+
+# Temporary paths to save the downloaded files
+model_path = '/tmp/' + model_file_name
+labels_path = '/tmp/' + labels_file_name
+
+# Download model from S3
+s3.download_file(bucket_name, model_file_name, model_path)
+
+# Download labels from S3
+s3.download_file(bucket_name, labels_file_name, labels_path)
 
 # Load the model
-model = load_model("keras_Model.h5", compile=False)
+model = load_model(model_path, compile=False)
 
 # Load the labels
-class_names = open("labels.txt", "r").readlines()
+class_names = open(labels_path, "r").readlines()
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
@@ -39,5 +56,5 @@ class_name = class_names[index]
 confidence_score = prediction[0][index]
 
 # Print prediction and confidence score
-print("Class:", class_name[2:], end="")
+print("Class:", class_name.strip(), end="")
 print("Confidence Score:", confidence_score)
